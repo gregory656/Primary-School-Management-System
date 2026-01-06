@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { DataProvider } from './context/DataContext';
+import DataProvider from './context/DataContext.tsx';
 import Login from './components/Login';
 import Layout from './components/Layout';
 import Dashboard from './components/Dashboard';
@@ -12,7 +12,9 @@ import DeputyDashboard from './components/dashboards/DeputyDashboard';
 import DeputyStudents from './components/dashboards/DeputyStudents';
 import DeputyAttendance from './components/dashboards/DeputyAttendance';
 import DeputyResults from './components/dashboards/DeputyResults';
-
+import HeadteacherDashboard from './components/dashboards/HeadteacherDashboard';
+import ClassTeacherDashboard from './components/dashboards/ClassTeacherDashboard';
+import StudentDashboard from './components/dashboards/StudentDashboard';
 import SubjectTeacherDashboard from './components/dashboards/SubjectTeacherDashboard';
 
 const theme = createTheme({
@@ -56,15 +58,15 @@ function App() {
 
     switch (user.role) {
       case 'headteacher':
-        return <Dashboard role={user.role} currentPage={currentPage} />;
+        return <HeadteacherDashboard currentPage={currentPage} />;
       case 'deputy':
         return <DeputyDashboard onNavigate={handleNavigate} />;
       case 'classteacher':
-        return <Dashboard role={user.role} currentPage={currentPage} />;
+        return <ClassTeacherDashboard currentPage={currentPage} userId={user.id} />;
       case 'subjectteacher':
         return <SubjectTeacherDashboard onNavigate={handleNavigate} />;
       case 'student':
-        return <Dashboard role={user.role} currentPage={currentPage} />;
+        return <StudentDashboard currentPage={currentPage} userId={user.id} />;
       default:
         return <Dashboard role={user.role} currentPage={currentPage} />;
     }

@@ -11,7 +11,7 @@ import {
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { useData } from '../context/DataContext';
+import { useData } from '../hooks/useData';
 import HeadSidebar from './sidebars/Head';
 import DeputySidebar from './sidebars/Deputy';
 import ClassTeacherSidebar from './sidebars/ClassTeacher';

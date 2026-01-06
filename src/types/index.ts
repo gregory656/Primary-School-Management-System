@@ -109,3 +109,37 @@ export interface ImportantDay {
   date: string;
   type: 'holiday' | 'event';
 }
+
+export interface DisciplineRecord {
+  id: number;
+  term: string;
+  rating: number;
+  notes: string;
+}
+
+export interface GradeRecord {
+  id: number;
+  grade: string;
+  year: string;
+  averageScore: number;
+}
+
+export interface FeeBreakdown {
+  id: number;
+  description: string;
+  amount: number;
+}
+
+export interface SchoolResult {
+  id: number;
+  studentId: number;
+  overallGrade: string;
+  year: string;
+}
+
+export interface ClassSubject {
+  id: number;
+  classId: number;
+  subjectId: number;
+  teacherId?: number;
+}

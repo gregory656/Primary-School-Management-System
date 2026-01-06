@@ -20,7 +20,7 @@ import {
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
-import { useData } from '../context/DataContext';
+import { useData } from '../hooks/useData';
 import type { Teacher } from '../types';
 
 const Teachers: React.FC = () => {

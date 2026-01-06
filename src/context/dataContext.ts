@@ -1,0 +1,52 @@
+import { createContext } from 'react';
+import type { Student, Teacher, Class, Subject, Attendance, Result, Fee, TimetableEntry, User, AcademicYear, Term, ImportantDay, ClassSubject } from '../types';
+
+export interface DataContextType {
+  students: Student[];
+  teachers: Teacher[];
+  classes: Class[];
+  subjects: Subject[];
+  attendance: Attendance[];
+  results: Result[];
+  fees: Fee[];
+  timetable: TimetableEntry[];
+  academicYear: AcademicYear | null;
+  terms: Term[];
+  importantDays: ImportantDay[];
+  users: User[];
+  classSubjects: ClassSubject[];
+  setClassSubjects: (classSubjects: ClassSubject[]) => void;
+  addStudent: (student: Omit<Student, 'id'>) => void;
+  updateStudent: (id: number, student: Partial<Student>) => void;
+  deleteStudent: (id: number) => void;
+  addTeacher: (teacher: Omit<Teacher, 'id'>) => void;
+  updateTeacher: (id: number, teacher: Partial<Teacher>) => void;
+  deleteTeacher: (id: number) => void;
+  addClass: (class_: Omit<Class, 'id'>) => void;
+  updateClass: (id: number, class_: Partial<Class>) => void;
+  deleteClass: (id: number) => void;
+  addSubject: (subject: Omit<Subject, 'id'>) => void;
+  updateSubject: (id: number, subject: Partial<Subject>) => void;
+  deleteSubject: (id: number) => void;
+  addAttendance: (attendance: Omit<Attendance, 'id'>) => void;
+  updateAttendance: (id: number, attendance: Partial<Attendance>) => void;
+  deleteAttendance: (id: number) => void;
+  addResult: (result: Omit<Result, 'id'>) => void;
+  updateResult: (id: number, result: Partial<Result>) => void;
+  deleteResult: (id: number) => void;
+  addFee: (fee: Omit<Fee, 'id'>) => void;
+  updateFee: (id: number, fee: Partial<Fee>) => void;
+  deleteFee: (id: number) => void;
+  addTimetableEntry: (entry: Omit<TimetableEntry, 'id'>) => void;
+  updateTimetableEntry: (id: number, updates: Partial<TimetableEntry>) => void;
+  deleteTimetableEntry: (id: number) => void;
+  setAcademicYear: (academicYear: AcademicYear | null) => void;
+  addTerm: (term: Omit<Term, 'id'>) => void;
+  updateTerm: (id: number, term: Partial<Term>) => void;
+  deleteTerm: (id: number) => void;
+  addImportantDay: (day: Omit<ImportantDay, 'id'>) => void;
+  updateImportantDay: (id: number, day: Partial<ImportantDay>) => void;
+  deleteImportantDay: (id: number) => void;
+}
+
+export const DataContext = createContext<DataContextType | undefined>(undefined);

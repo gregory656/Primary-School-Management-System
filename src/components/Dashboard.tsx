@@ -5,7 +5,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import ClassIcon from '@mui/icons-material/Class';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useData } from '../context/DataContext';
+import { useData } from '../hooks/useData';
 import ClassSubjectSetup from './ClassSubjectSetup';
 import AcademicSetup from './AcademicSetup';
 

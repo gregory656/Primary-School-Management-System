@@ -3,7 +3,7 @@ import { Card, CardContent, Typography, Box, Table, TableBody, TableCell, TableC
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
-import { useData } from '../context/DataContext';
+import { useData } from '../hooks/useData';
 import type { Term, ImportantDay } from '../types';
 
 const AcademicSetup: React.FC = () => {

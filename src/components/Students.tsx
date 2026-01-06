@@ -24,7 +24,7 @@ import {
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
-import { useData } from '../context/DataContext';
+import { useData } from '../hooks/useData';
 import type { Student } from '../types';
 
 const Students: React.FC = () => {
@@ -46,7 +46,7 @@ const Students: React.FC = () => {
     deleteStudent(id);
   };
 
-  const handleAdd = (student: Omit<Student, 'id'> & { id: number }) => {
+  const handleAdd = (student: Omit<Student, 'id'>) => {
     addStudent(student);
     setShowAddModal(false);
   };
@@ -217,8 +217,12 @@ const StudentModal: React.FC<StudentModalProps> = ({ open, student, onSave, onCl
       classId: student?.classId || 1,
       attendance: student?.attendance || 0,
       feesPaid: student?.feesPaid || false,
-      gender: student?.gender || 'male' as 'male' | 'female',
+      gender: student?.gender || ('male' as 'male' | 'female'),
       emergencyContact: student?.emergencyContact || '',
+      admissionDate: student?.admissionDate || new Date().toISOString().split('T')[0],
+      expectedLeaveDate: student?.expectedLeaveDate || '',
+      disciplineRecords: student?.disciplineRecords || [],
+      gradeHistory: student?.gradeHistory || [],
     };
     onSave(studentData);
   };

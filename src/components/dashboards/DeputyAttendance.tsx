@@ -4,7 +4,6 @@ import {
   Typography,
   Card,
   CardContent,
-  Grid,
   Chip,
   Table,
   TableBody,
@@ -16,7 +15,8 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material';
-import { useData } from '../../context/DataContext';
+import Grid from '@mui/system/Grid';
+import { useData } from '../../hooks/useData';
 
 const DeputyAttendance: React.FC = () => {
   const { students, attendance } = useData();
@@ -47,7 +47,7 @@ const DeputyAttendance: React.FC = () => {
   // Sort by attendance percentage (best first)
   const sortedStats = attendanceStats.sort((a, b) => b.percentage - a.percentage);
 
-  const getRatingColor = (rating: string) => {
+  const getRatingColor = (rating: string): 'success' | 'primary' | 'warning' | 'error' => {
     switch (rating) {
       case 'Excellent': return 'success';
       case 'Good': return 'primary';
@@ -73,7 +73,7 @@ const DeputyAttendance: React.FC = () => {
 
       {/* Overall Statistics */}
       <Grid container spacing={{ xs: 2, md: 3 }} sx={{ mb: 4 }}>
-        <Grid item xs={12} sm={6} lg={3}>
+        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
           <Card sx={{ bgcolor: 'primary.main', color: 'white' }}>
             <CardContent>
               <Typography variant="h6">Total Students</Typography>
@@ -81,7 +81,7 @@ const DeputyAttendance: React.FC = () => {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={12} sm={6} lg={3}>
+        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
           <Card sx={{ bgcolor: 'success.main', color: 'white' }}>
             <CardContent>
               <Typography variant="h6">Excellent (≥95%)</Typography>
@@ -89,7 +89,7 @@ const DeputyAttendance: React.FC = () => {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={12} sm={6} lg={3}>
+        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
           <Card sx={{ bgcolor: 'warning.main', color: 'white' }}>
             <CardContent>
               <Typography variant="h6">Average (75-84%)</Typography>
@@ -97,7 +97,7 @@ const DeputyAttendance: React.FC = () => {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={12} sm={6} lg={3}>
+        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
           <Card sx={{ bgcolor: 'error.main', color: 'white' }}>
             <CardContent>
               <Typography variant="h6">Poor (less than 75%)</Typography>
@@ -144,7 +144,7 @@ const DeputyAttendance: React.FC = () => {
                 <TableCell>
                   <Chip
                     label={student.rating}
-                    color={getRatingColor(student.rating) as any}
+                    color={getRatingColor(student.rating)}
                     size="small"
                   />
                 </TableCell>

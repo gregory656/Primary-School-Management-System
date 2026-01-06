@@ -10,7 +10,7 @@ import {
 import SchoolIcon from '@mui/icons-material/School';
 import AssessmentIcon from '@mui/icons-material/Assessment';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
-import { useData } from '../../context/DataContext';
+import { useData } from '../../hooks/useData';
 
 interface DeputyDashboardProps {
   onNavigate: (page: string) => void;
@@ -32,9 +32,9 @@ const DeputyDashboard: React.FC<DeputyDashboardProps> = ({ onNavigate }) => {
         Deputy Dashboard
       </Typography>
 
-      <Grid container spacing={{ xs: 2, md: 3 }}>
+      <Grid container spacing={3}>
         {stats.map((stat, index) => (
-          <Grid item xs={12} sm={6} lg={4} key={index}>
+          <Grid xs={12} sm={6} lg={4} key={index}>
             <Card sx={{ bgcolor: stat.color, color: 'white', height: '100%' }}>
               <CardContent>
                 <Box display="flex" alignItems="center" justifyContent="space-between">
@@ -61,7 +61,7 @@ const DeputyDashboard: React.FC<DeputyDashboardProps> = ({ onNavigate }) => {
           Quick Actions
         </Typography>
         <Grid container spacing={2}>
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid xs={12} sm={6} md={4}>
             <Button
               variant="contained"
               fullWidth
@@ -71,7 +71,7 @@ const DeputyDashboard: React.FC<DeputyDashboardProps> = ({ onNavigate }) => {
               View Students
             </Button>
           </Grid>
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid xs={12} sm={6} md={4}>
             <Button
               variant="contained"
               fullWidth
@@ -81,7 +81,7 @@ const DeputyDashboard: React.FC<DeputyDashboardProps> = ({ onNavigate }) => {
               Manage Attendance
             </Button>
           </Grid>
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid xs={12} sm={6} md={4}>
             <Button
               variant="contained"
               fullWidth

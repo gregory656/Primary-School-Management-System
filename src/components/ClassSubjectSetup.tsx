@@ -5,7 +5,6 @@ import {
   Card,
   CardContent,
   Button,
-  TextField,
   Select,
   MenuItem,
   FormControl,
@@ -25,14 +24,9 @@ import {
   Chip,
 } from '@mui/material';
 import { Add as AddIcon, Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
-import { useData } from '../context/DataContext';
+import { useData } from '../hooks/useData';
 
-interface ClassSubject {
-  id: number;
-  classId: number;
-  subjectId: number;
-  teacherId: number;
-}
+import type { ClassSubject } from '../types';
 
 const ClassSubjectSetup: React.FC = () => {
   const { classes, subjects, teachers, classSubjects, setClassSubjects } = useData();
@@ -50,7 +44,7 @@ const ClassSubjectSetup: React.FC = () => {
       setFormData({
         classId: item.classId.toString(),
         subjectId: item.subjectId.toString(),
-        teacherId: item.teacherId.toString(),
+        teacherId: item.teacherId?.toString() || '',
       });
     } else {
       setEditing(null);
@@ -76,7 +70,7 @@ const ClassSubjectSetup: React.FC = () => {
     };
 
     if (editing) {
-      setClassSubjects(classSubjects.map(item => item.id === editing.id ? newItem : item));
+      setClassSubjects(classSubjects.map((item: ClassSubject) => item.id === editing.id ? newItem : item));
     } else {
       setClassSubjects([...classSubjects, newItem]);
     }
@@ -85,12 +79,12 @@ const ClassSubjectSetup: React.FC = () => {
   };
 
   const handleDelete = (id: number) => {
-    setClassSubjects(classSubjects.filter(item => item.id !== id));
+    setClassSubjects(classSubjects.filter((item: ClassSubject) => item.id !== id));
   };
 
   const getClassName = (id: number) => classes.find(c => c.id === id)?.name || 'Unknown';
   const getSubjectName = (id: number) => subjects.find(s => s.id === id)?.name || 'Unknown';
-  const getTeacherName = (id: number) => teachers.find(t => t.id === id)?.name || 'Unknown';
+  const getTeacherName = (id: number | undefined) => id ? teachers.find(t => t.id === id)?.name || 'Unknown' : 'Unassigned';
 
   return (
     <Box sx={{ p: 3 }}>
@@ -118,7 +112,7 @@ const ClassSubjectSetup: React.FC = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {classSubjects.map((item) => (
+                {classSubjects.map((item: ClassSubject) => (
                   <TableRow key={item.id}>
                     <TableCell>
                       <Chip label={getClassName(item.classId)} color="primary" />

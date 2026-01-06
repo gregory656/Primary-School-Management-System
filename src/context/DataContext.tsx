@@ -1,72 +1,14 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { useState } from 'react';
 import type { ReactNode } from 'react';
-import type { Student, Teacher, Class, Subject, Attendance, Result, Fee, TimetableEntry, User, AcademicYear, Term, ImportantDay, DisciplineRecord, GradeRecord, FeeBreakdown, SchoolResult } from '../types';
-
-interface DataContextType {
-  students: Student[];
-  teachers: Teacher[];
-  classes: Class[];
-  subjects: Subject[];
-  attendance: Attendance[];
-  results: Result[];
-  fees: Fee[];
-  timetable: TimetableEntry[];
-  academicYear: AcademicYear | null;
-  terms: Term[];
-  importantDays: ImportantDay[];
-  disciplineRecords: DisciplineRecord[];
-  gradeHistory: GradeRecord[];
-  feeBreakdowns: FeeBreakdown[];
-  schoolResults: SchoolResult[];
-  users: User[];
-  addStudent: (student: Omit<Student, 'id'>) => void;
-  updateStudent: (id: number, student: Partial<Student>) => void;
-  deleteStudent: (id: number) => void;
-  addTeacher: (teacher: Omit<Teacher, 'id'>) => void;
-  updateTeacher: (id: number, teacher: Partial<Teacher>) => void;
-  deleteTeacher: (id: number) => void;
-  addClass: (class_: Omit<Class, 'id'>) => void;
-  updateClass: (id: number, class_: Partial<Class>) => void;
-  deleteClass: (id: number) => void;
-  addSubject: (subject: Omit<Subject, 'id'>) => void;
-  updateSubject: (id: number, subject: Partial<Subject>) => void;
-  deleteSubject: (id: number) => void;
-  addAttendance: (attendance: Omit<Attendance, 'id'>) => void;
-  updateAttendance: (id: number, attendance: Partial<Attendance>) => void;
-  deleteAttendance: (id: number) => void;
-  addResult: (result: Omit<Result, 'id'>) => void;
-  updateResult: (id: number, result: Partial<Result>) => void;
-  deleteResult: (id: number) => void;
-  addFee: (fee: Omit<Fee, 'id'>) => void;
-  updateFee: (id: number, fee: Partial<Fee>) => void;
-  deleteFee: (id: number) => void;
-  addTimetableEntry: (entry: Omit<TimetableEntry, 'id'>) => void;
-  updateTimetableEntry: (id: number, updates: Partial<TimetableEntry>) => void;
-  deleteTimetableEntry: (id: number) => void;
-  setAcademicYear: (academicYear: AcademicYear | null) => void;
-  addTerm: (term: Omit<Term, 'id'>) => void;
-  updateTerm: (id: number, term: Partial<Term>) => void;
-  deleteTerm: (id: number) => void;
-  addImportantDay: (day: Omit<ImportantDay, 'id'>) => void;
-  updateImportantDay: (id: number, day: Partial<ImportantDay>) => void;
-  deleteImportantDay: (id: number) => void;
-}
-
-const DataContext = createContext<DataContextType | undefined>(undefined);
-
-export const useData = () => {
-  const context = useContext(DataContext);
-  if (!context) {
-    throw new Error('useData must be used within a DataProvider');
-  }
-  return context;
-};
+import type { Student, Teacher, Class, Subject, Attendance, Result, Fee, TimetableEntry, User, AcademicYear, Term, ImportantDay, ClassSubject } from '../types';
+import { DataContext } from './dataContext';
+import type { DataContextType } from './dataContext';
 
 interface DataProviderProps {
   children: ReactNode;
 }
 
-export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
+const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
   // Initial data
   const [students, setStudents] = useState<Student[]>([
     { id: 1, name: 'Alice Johnson', grade: '5th', age: 11, email: 'alice@example.com', classId: 1, attendance: 95, feesPaid: true, gender: 'female', emergencyContact: '+1-555-1001', admissionDate: '2022-01-15', expectedLeaveDate: '2026-11-30', disciplineRecords: [{ id: 1, term: 'Term 1', rating: 4, notes: 'Excellent behavior' }, { id: 2, term: 'Term 2', rating: 5, notes: 'Outstanding conduct' }], gradeHistory: [{ id: 1, grade: '4th', year: '2022-2023', averageScore: 88 }, { id: 2, grade: '5th', year: '2023-2024', averageScore: 92 }] },
@@ -136,6 +78,8 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
     { id: 4, name: 'Mr. Robert Wilson', role: 'subjectteacher', username: 'teacher2', password: 'admin123', entityId: 4 },
     { id: 5, name: 'Alice Johnson', role: 'student', username: 'student1', password: 'student123', entityId: 1 },
   ]);
+
+  const [classSubjects, setClassSubjects] = useState<ClassSubject[]>([]);
 
   // CRUD methods
   const addStudent = (student: Omit<Student, 'id'>) => {
@@ -289,11 +233,9 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
     academicYear,
     terms,
     importantDays,
-    disciplineRecords,
-    gradeHistory,
-    feeBreakdowns,
-    schoolResults,
     users,
+    classSubjects,
+    setClassSubjects,
     addStudent,
     updateStudent,
     deleteStudent,
@@ -329,3 +271,5 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
 };
+
+export default DataProvider;
